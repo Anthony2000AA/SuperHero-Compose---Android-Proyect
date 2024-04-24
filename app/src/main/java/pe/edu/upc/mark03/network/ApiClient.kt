@@ -1,4 +1,4 @@
-package pe.edu.upc.mark03.model.remote
+package pe.edu.upc.mark03.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
