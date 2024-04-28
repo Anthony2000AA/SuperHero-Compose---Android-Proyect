@@ -7,7 +7,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -18,6 +23,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -26,40 +33,51 @@ import pe.edu.upc.mark03.repository.HeroRepository
 
 @Composable
 fun Home(){
-    val name=remember{
+    val name = remember{
         mutableStateOf("")
+    }
+    val heroList = remember{
+        mutableStateOf(emptyList<Hero>())
     }
 
     Scaffold {paddingValues->
         Column(modifier = Modifier.padding(paddingValues)) {
-            HeroSearch(name)
-            HeroList(name)
+            HeroSearch(name,heroList)
+            HeroList(heroList)
         }
     }
 }
 
 @Composable
-fun HeroSearch(name: MutableState<String>){
+fun HeroSearch(name: MutableState<String>, heroList: MutableState<List<Hero>>){
+
+    val heroRepository= HeroRepository()
 
     OutlinedTextField(
         value = name.value,
-        onValueChange = {},
-        placeholder = {Text("Search hero")} )
+        modifier=Modifier.fillMaxWidth().padding(2.dp),
+        onValueChange = {
+                        name.value=it
+        },
+        placeholder = {Text("Search hero")},
+        leadingIcon = { Icon(Icons.Filled.Search,"Search hero") },//Icono de lupa
+        keyboardOptions = KeyboardOptions(
+            keyboardType= KeyboardType.Text,
+            imeAction = ImeAction.Search//Boton de busqueda en el teclado del celular
+        ),
+        keyboardActions = KeyboardActions(//Cuando se presiona el boton de busqueda, se ejecuta la funcion
+            onSearch = {
+                heroRepository.searchHero(name.value){
+                    heroList.value=it
+                }
+            }
+        )
+    )
 }
 
 
 @Composable
-fun HeroList(name: MutableState<String>){
-
-    var heroList = remember{
-        mutableStateOf(emptyList<Hero>())
-    }
-
-    val heroRepository= HeroRepository()
-
-    heroRepository.searchHero("batman"){
-        heroList.value=it
-    }
+fun HeroList(heroList: MutableState<List<Hero>>) {
 
 
     LazyColumn{
@@ -83,6 +101,10 @@ fun HeroCard(hero:Hero){
                 Text(text=hero.biography.fullName)
 
             }
+            //coloca icono de favorito
+
+
+
         }
     }
 }
