@@ -11,8 +11,8 @@ import retrofit2.Response
 class HeroRepository(
     val heroService: HeroService = HeroServiceFactory.getHeroService()
 ) {
-    fun searchHero(callback:(List<Hero>)->Unit){
-        val searchHero= heroService.searchHero()
+    fun searchHero(name:String,callback:(List<Hero>)->Unit){
+        val searchHero= heroService.searchHero(name=name)//lo pongo =name porque el nombre del parametro es igual al nombre de la variable, token no porque ya tiene un valor por defecto
         searchHero.enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
