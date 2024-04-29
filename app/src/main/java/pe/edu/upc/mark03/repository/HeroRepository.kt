@@ -30,5 +30,27 @@ class HeroRepository(
     }
 
 
+    fun getHeroById(id:String,callback:(Hero)->Unit){
+        val getHeroById= heroService.getHeroById(id=id)
+
+        getHeroById.enqueue(object : Callback<Hero> {
+            override fun onResponse(call: Call<Hero>, response: Response<Hero>) {
+                if (response.isSuccessful) {
+                    val hero = response.body() as Hero
+
+                        callback(hero)
+
+                }
+            }
+
+            override fun onFailure(call: Call<Hero>, t: Throwable) {
+                t.message?.let {
+                    println(it)
+                }
+            }
+        })
+    }
+
+
 
 }

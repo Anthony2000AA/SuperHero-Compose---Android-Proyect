@@ -9,8 +9,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+
 import androidx.compose.ui.tooling.preview.Preview
 import pe.edu.upc.mark03.ui.home.Home
+
 import pe.edu.upc.mark03.ui.theme.Mark03Theme
 
 class MainActivity : ComponentActivity() {
