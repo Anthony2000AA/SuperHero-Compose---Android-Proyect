@@ -32,7 +32,7 @@ fun HeroDetails(id:String){
         mutableStateOf<Hero?>(null)
     }
 
-    HeroRepositoryFactory.getHeroRepository().getHeroById(id){
+    HeroRepositoryFactory.getHeroRepository().searchHeroById(id){
         hero.value = it
     }
 

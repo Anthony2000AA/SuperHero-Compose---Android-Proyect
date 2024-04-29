@@ -20,7 +20,9 @@ data class Hero(
     val image: Image,
 
     @SerializedName("powerstats")
-    val powerStats: PowerStats
+    val powerStats: PowerStats,
+
+    var isFavorite: Boolean = false//esto es para saber si el heroe es favorito o no, y guardarlo en la base de datos
 )
 
 

@@ -4,15 +4,14 @@ import pe.edu.upc.mark03.model.remote.HeroService
 
 class HeroServiceFactory private constructor(){//Las clases de tipo factory son clases que se encargan de crear instancias de otras clases/objetos
 
-    companion object{
+    companion object {
 
-        private var heroService: HeroService?=null
-
+        private var heroService: HeroService? = null
         fun getHeroService(): HeroService {
-
-            if(heroService==null){
+            if (heroService == null) {
                 heroService = RetrofitFactory.getRetrofit().create(HeroService::class.java)
             }
+
             return heroService as HeroService
         }
     }

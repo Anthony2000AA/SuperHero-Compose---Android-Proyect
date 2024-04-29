@@ -1,9 +1,12 @@
 package pe.edu.upc.mark03.model.local
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
+
+@Dao
 interface HeroDao {
 
     @Insert

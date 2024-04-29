@@ -100,6 +100,10 @@ fun HeroCard(hero:Hero, selectHero:(String)->Unit){
         mutableStateOf(false)
     }
 
+    isFavorite.value=hero.isFavorite
+
+    val heroRepository = HeroRepositoryFactory.getHeroRepository()
+
 
     Card (modifier= Modifier
         .fillMaxWidth()
@@ -120,6 +124,16 @@ fun HeroCard(hero:Hero, selectHero:(String)->Unit){
             //coloca icono de favorito
             IconButton(onClick = {
                 isFavorite.value=!isFavorite.value
+
+                if (isFavorite.value){
+                    heroRepository.insertHero(hero.id)
+                    hero.isFavorite=true
+                }else{
+                    heroRepository.deleteHero(hero.id)
+                    hero.isFavorite=false
+                }
+
+
             }, modifier= Modifier.weight(1f)) {
                 Icon(Icons.Filled.Favorite,"Favorite", tint = if(isFavorite.value) Color.Red else Color.Gray)
             }
