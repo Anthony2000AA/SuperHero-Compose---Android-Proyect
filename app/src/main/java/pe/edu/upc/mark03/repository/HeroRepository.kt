@@ -3,13 +3,15 @@ package pe.edu.upc.mark03.repository
 import pe.edu.upc.mark03.factories.HeroServiceFactory
 import pe.edu.upc.mark03.model.data.ApiResponse
 import pe.edu.upc.mark03.model.data.Hero
+import pe.edu.upc.mark03.model.local.HeroDao
 import pe.edu.upc.mark03.model.remote.HeroService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class HeroRepository(
-    val heroService: HeroService = HeroServiceFactory.getHeroService()
+    val heroService: HeroService,
+    val heroDao: HeroDao
 ) {
     fun searchHero(name:String,callback:(List<Hero>)->Unit){
         val searchHero= heroService.searchHero(name=name)//lo pongo =name porque el nombre del parametro es igual al nombre de la variable, token no porque ya tiene un valor por defecto

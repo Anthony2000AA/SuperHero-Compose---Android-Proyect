@@ -4,7 +4,7 @@ import pe.edu.upc.mark03.MyApplication
 import pe.edu.upc.mark03.model.local.HeroDao
 import pe.edu.upc.mark03.persistence.AppDatabase
 
-class HeroDaoFactory {
+class HeroDaoFactory  private constructor(){
 
     companion object {
         fun getHeroDao(): HeroDao {

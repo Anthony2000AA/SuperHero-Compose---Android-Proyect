@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
+import pe.edu.upc.mark03.factories.HeroRepositoryFactory
 import pe.edu.upc.mark03.model.data.Hero
 import pe.edu.upc.mark03.repository.HeroRepository
 import pe.edu.upc.mark03.ui.herodetails.HeroDetails
@@ -52,7 +53,7 @@ fun HeroesSearch(name: MutableState<String>,heroList: MutableState<List<Hero>> ,
 @Composable
 fun HeroSearch(name: MutableState<String>, heroList: MutableState<List<Hero>>){
 
-    val heroRepository= HeroRepository()
+    val heroRepository = HeroRepositoryFactory.getHeroRepository()
 
     OutlinedTextField(
         value = name.value,

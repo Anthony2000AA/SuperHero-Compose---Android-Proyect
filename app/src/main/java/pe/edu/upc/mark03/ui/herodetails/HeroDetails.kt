@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import pe.edu.upc.mark03.factories.HeroRepositoryFactory
 import pe.edu.upc.mark03.model.data.Biography
 import pe.edu.upc.mark03.model.data.Hero
 import pe.edu.upc.mark03.model.data.PowerStats
@@ -31,7 +32,7 @@ fun HeroDetails(id:String){
         mutableStateOf<Hero?>(null)
     }
 
-    HeroRepository().getHeroById(id){
+    HeroRepositoryFactory.getHeroRepository().getHeroById(id){
         hero.value = it
     }
 
